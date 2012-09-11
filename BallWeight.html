@@ -1,0 +1,99 @@
+﻿
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>小球称重</title>
+        <style>
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{display:block;margin:0;padding:0;}mark{background:#ff0;}
+body{font-family:'微软雅黑', monaco, monospace;font-size:14px}
+#wrapper{width:740px;line-height:20px;padding-bottom:20px;margin:0 auto}
+h1{font-size:60px;line-height:60px;padding:40px 0}
+#page{text-align:center;padding-top:40px}
+#page span{display:inline-block;color:#fff;background:#090;padding:4px 12px}
+#page em{display:block;text-align:center;margin-top:10px;font-style:normal}
+#desc{padding-bottom:60px}
+#desc strong{font-size:120%;color:red;padding:0 4px}
+h1{color:#00c}
+h3{color:#00c;font-size:20px;line-height:30px}
+#page span{background-color:#00c}
+#balls{border:solid 1px #999;width:720px;height:60px;margin-bottom:20px;padding:8px}
+#balls li{width:60px;height:60px;float:left}
+.ball{background:url(img/ball.png) no-repeat 50% 50%;text-align:center;cursor:move;height:60px;width:60px;line-height:60px;z-index:10;display: inline-block;float:left;opacity:0.5}
+.ball span{color:#000000;padding:0 4px;font-size:28px;font-weight:600;opacity:1}
+#libra{position:relative;width:740px;height:420px;background:url(img/libra_1.png) no-repeat 50% 100%}
+#libra .platform{width:250px;height:230px;top:32px;background:url(img/platform.png) no-repeat 50% 110%}
+#libra .platform.down{transition: all 2s ease-out 0s;-webkit-transition: all 2s ease-out 0s;-moz-transition: all 2s ease-out 0s;-o-transition: all 2s ease-out 0s;top: 70px;}
+#libra .platform.up{transition: all 2s ease-out 0s;-webkit-transition: all 2s ease-out 0s;-moz-transition: all 2s ease-out 0s;-o-transition: all 2s ease-out 0s;top: -10px;}
+#libra #platform-left{position:absolute;left:0}
+#libra #platform-right{position:absolute;right:0}
+#libra .platform-region{height:180px;border:dotted 2px #ccc}
+#libra .platform-hover .platform-region{border-color:#f90}
+#libra #balance{position:absolute;background:url(img/blance_1.png) no-repeat 50% -960px;height:120px;width:100%;top:190px}
+#libra #balance.left{-webkit-transform: rotate(10deg);-moz-transform: rotate(10deg);-o-transform: rotate(10deg);transition: all 2s ease-out 0s;-webkit-transition: all 2s ease-out 0s;-moz-transition: all 2s ease-out 0s;-o-transition: all 2s ease-out 0s;}
+#libra #balance.right{-webkit-transform: rotate(-10deg);-moz-transform: rotate(-10deg);-o-transform: rotate(-10deg);transition: all 2s ease-out 0s;-webkit-transition: all 2s ease-out 0s;-moz-transition: all 2s ease-out 0s;-o-transition: all 2s ease-out 0s;}
+.is-moving{cursor:move}
+.button{padding: 8px 14px;font-family: '微软雅黑', 'Microsoft Yahei';font-size: 16px;}
+#operation{text-align:center;padding:20px 0}
+#operation-record{margin-top:20px;display:none}
+#operation-record ul{border:dashed 1px #ccc;border-radius:4px;padding:4px 8px}
+#result{margin-top:40px;line-height:24px}
+#result p{margin-bottom:20px}
+#result .btn{text-align:center}
+#operation button,#result button{font-size:18px;line-height:24px;padding:6px 12px}
+		</style>
+	</head>
+<body>
+	<div id="wrapper">
+    	<h1>小球称重</h1>
+        <div id="desc">
+        	<p>下面共有 12 个小球，其中一个的质量与众不同，不知道它是偏轻还是偏重。</p>
+            <p>请使用天秤找出这个小球，并指出它是偏轻还是偏重。</p>
+            <p>最多只能称<STRONG>3</STRONG>次。</p>
+        </div>
+        <div>
+        	<ul id="balls">
+            	<li><div class="ball" draggable="true"><span>1</span></div></li>
+                <li><div class="ball" draggable="true"><span>2</span></div></li>
+                <li><div class="ball" draggable="true"><span>3</span></div></li>
+                <li><div class="ball" draggable="true"><span>4</span></div></li>
+                <li><div class="ball" draggable="true"><span>5</span></div></li>
+                <li><div class="ball" draggable="true"><span>6</span></div></li>
+                <li><div class="ball" draggable="true"><span>7</span></div></li>
+                <li><div class="ball" draggable="true"><span>8</span></div></li>
+                <li><div class="ball" draggable="true"><span>9</span></div></li>
+                <li><div class="ball" draggable="true"><span>10</span></div></li>
+                <li><div class="ball" draggable="true"><span>11</span></div></li>
+                <li><div class="ball" draggable="true"><span>12</span></div></li>
+            </ul>
+        </div>
+		<div id="libra">
+        	<div class="platform" id="platform-left">
+            	<div class="platform-region"></div>
+            </div>
+            <div class="platform" id="platform-right">
+            	<div class="platform-region"></div>
+            </div>
+            <div id="balance"></div>
+        </div>
+        <div id="operation">
+            <input type="button" id="do-weight" value="称一下" class="button"/>
+        </div>
+        <div id="operation-record">
+        	<h3>称量记录</h3>
+            <ul id="records"></ul>
+        </div>
+        <div id="result">
+        	<h3>结论：</h3>
+            <p><select id="ball-idx">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+            </select>号小球的质量：<input id="ball-w-l-0" name="ball-w-l" value="0" type="radio"
+><label for="ball-w-l-0">偏轻</label><input id="ball-w-l-1" name="ball-w-l" value="1" type="radio"><label for="ball-w-l-1">偏重</label>
+			</p>
+            <p class="btn">
+            <input type="button" value="提交" id="btn-submit" class="button" />
+        </div>
+    </div>
+    <script src="js/Ball_Weight.js"></script>
+</body>
+</html>
